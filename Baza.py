@@ -12,5 +12,3 @@ records = cursor.fetchall()
 for row in records:
     listnum.append(row[0])
     listword.append(row[1])
-print(listnum)
-print(listword)
