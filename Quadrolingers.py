@@ -5,6 +5,7 @@ if sys.argv:
     folder, filename = os.path.split(filepath)
     os.chdir(folder) # now your working dir is the parent folder of the script
 import customtkinter as ctk
+
 def start():
     from Easy import windowgra
 def start2():
