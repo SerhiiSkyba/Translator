@@ -1,12 +1,17 @@
 import os
 import sys
 import random
+import customtkinter as ctk
+from tkinter import *
 if sys.argv:
     filepath = sys.argv[0]
     folder, filename = os.path.split(filepath)
     os.chdir(folder) # now your working dir is the parent folder of the script
-import customtkinter as ctk
-from tkinter import *
+sys.path.append("Database")
+sys.path.append("Images")
+sys.path.append("Textures")
+sys.path.append("Difficulties")
+
 def start():
     window.destroy()
     from Easy import windowgra
@@ -21,16 +26,17 @@ def start4():
     from Hard import windowgra
 def exit():
     window.destroy()
+    
 window = ctk.CTk()
-bg = PhotoImage(file = "tlo.png")
+bg = PhotoImage(file = folder+"\\Textures\\tlo.png")
 window.resizable(False,False)
 window.geometry("600x330")
 window.title("Quatrolingers")
 a = random.randint(1,4) 
 if (a!=1):
-    window.iconbitmap("image.ico")
+    window.iconbitmap(folder+"\\Textures\\image.ico")
 else:
-    window.iconbitmap("Heinz_Doofenshmirtz.ico")
+    window.iconbitmap(folder+"\\Textures\\Heinz_Doofenshmirtz.ico")
 
 
 label = ctk.CTkLabel(window,image = bg, text="")
