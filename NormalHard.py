@@ -76,8 +76,9 @@ def funkcja_sprawdzenia():
                 messagebox.showinfo(title='Wygrałeś',message='Ty wygrałeś, twój wynnik jest '+str(score)+'/20')
                 windowgra.destroy()
         except:
-            messagebox.showinfo(title='Wygrałeś',message='Ty wygrałeś, twój wynnik jest '+str(score)+'/20')
+            messagebox.showerror(title='Error',message='Sprawdż połączenie z internetem')
             windowgra.destroy()
+
         
     
     # ŻLA ODPOWIEDZ
@@ -102,7 +103,7 @@ def funkcja_sprawdzenia():
                 messagebox.showinfo(title='Przegrałeś',message='Ty przegrałeś, twój wynnik jest '+str(score))
                 windowgra.destroy()
         except:
-            messagebox.showinfo(title='Wygrałeś',message='Ty wygrałeś, twój wynnik jest '+str(score)+'/20')
+            messagebox.showerror(title='Error',message='Sprawdż połączenie z internetem')
             windowgra.destroy()
 
 # CZĘŚĆ GRAFICZNA
