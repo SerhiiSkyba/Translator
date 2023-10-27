@@ -3,7 +3,8 @@ import sys
 if sys.argv:
     filepath = sys.argv[0]
     folder, filename = os.path.split(filepath)
-    os.chdir(folder.replace("\\Difficulties",""))
+    folder = folder.replace("\\Difficulties","")
+    os.chdir(folder)
 sys.path.append("Images")
 sys.path.append("Database")
 
@@ -45,16 +46,34 @@ wylosowane_slowo_en.set(GoogleTranslator(source='pl', target='en').translate(wyl
 
 def test(x):
     global ilosc_pytan_odpowiedzialnych
+    global wylosowane_slowo
+    global wylosowane_slowo_en
+    global folder
     if x == wylosowane_slowo_en.get():
+        wylosowane_slowo = random.choice(pytania)
+        pytania.remove(wylosowane_slowo)
+        wylosowane_slowo_pl.set(wylosowane_slowo)
+        wylosowane_slowo_en.set(GoogleTranslator(source='pl', target='en').translate(wylosowane_slowo))
         zmien()
+        my_image.configure(light_image=Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'))
         ilosc_pytan_odpowiedzialnych = ilosc_pytan_odpowiedzialnych + 1
         ilosc_pytan.set('Pytanie '+str(ilosc_pytan_odpowiedzialnych)+"/20")
+        if ilosc_pytan_odpowiedzialnych == 20:
+            messagebox.showinfo(messagebox.showinfo(title='Wygrałeś',message='Ty wygrałeś, twój wynnik jest '+str(score)+'/20'))
+            window.destroy()
     else:
-        #messagebox.showinfo(title='Niepoprawne',message=Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'),size=(100,100)+" To jest "+str(wylosowane_slowo_pl.get())+" po angielsku to bedzie "+str(wylosowane_slowo_en.get()))
-        windowm = ctk.CTk()
+        zycia = zycia - 1
+        if zycia == 0 or zycia < 0 :
+            messagebox.showinfo(title='Przegrałeś',message='Ty przegrałeś, twój wynnik jest '+str(score))
+            window.destroy()
+        #if x == odpA.get() or x == odpB.get() or x == odpC.get() or x == odpD.get() or x == odpE.get() or x == odpF.get():
+            
+        ilosc_zyc.set('Sprób zostało się'+str(zycia))
+        windowm = ctk.CTkToplevel()
         my_imagem = ctk.CTkImage(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'),size = (100,100))
-        image_labelm = ctk.CTkLabel(windowm, image=my_image, text = "")
-        labelm = ctk.CTkLabel(windowm,text = " To jest "+str(wylosowane_slowo_pl.get())+" po angielsku to bedzie "+str(wylosowane_slowo_en.get()))
+        image_labelm = ctk.CTkLabel(windowm, image=my_imagem, text = "")
+        labelm = ctk.CTkLabel(windowm,text = " To jest "+str(wylosowane_slowo_pl.get())+", po angielsku to bedzie "+str(wylosowane_slowo_en.get()))
+        
         image_labelm.pack()
         labelm.pack()
         windowm.mainloop()
@@ -78,7 +97,6 @@ def zmien():
     a = random.randint(1,6)
     if a == 1:
         odpA.set(odpP.get())
-        strona.set(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'))
         odpB.set(random.choice(listword))
         odpC.set(random.choice(listword))
         odpD.set(random.choice(listword))
@@ -86,7 +104,6 @@ def zmien():
         odpF.set(random.choice(listword))
     if a == 2:
         odpB.set(odpP.get())
-        strona.set(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'))
         odpA.set(random.choice(listword))
         odpC.set(random.choice(listword))
         odpD.set(random.choice(listword))
@@ -94,7 +111,6 @@ def zmien():
         odpF.set(random.choice(listword))
     if a == 3:
         odpC.set(odpP.get())
-        strona.set(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'))
         odpA.set(random.choice(listword))
         odpB.set(random.choice(listword))
         odpD.set(random.choice(listword))
@@ -102,7 +118,6 @@ def zmien():
         odpF.set(random.choice(listword))
     if a == 4:
         odpD.set(odpP.get())
-        strona.set(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'))
         odpA.set(random.choice(listword))
         odpB.set(random.choice(listword))
         odpC.set(random.choice(listword))
@@ -110,7 +125,6 @@ def zmien():
         odpF.set(random.choice(listword))
     if a == 5:
         odpE.set(odpP.get())
-        strona.set(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'))
         odpA.set(random.choice(listword))
         odpB.set(random.choice(listword))
         odpD.set(random.choice(listword))
@@ -118,17 +132,12 @@ def zmien():
         odpF.set(random.choice(listword))
     if a == 6:
         odpF.set(odpP.get())
-        strona.set(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'))
         odpA.set(random.choice(listword))
         odpB.set(random.choice(listword))
         odpD.set(random.choice(listword))
         odpE.set(random.choice(listword))
         odpC.set(random.choice(listword))
 zmien()
-punkty = ctk.StringVar()  #punkty wyswietlane
-punktyV = 0   #variable dla punktow
-
-pomylka = 0  #licznik pomylek, jesli =4 to koniec gry
 my_image = ctk.CTkImage(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'),size = (100,100))
 image_label = ctk.CTkLabel(window, image=my_image, text = "")
 zycia_napis = ctk.CTkLabel(window,textvariable = ilosc_zyc)
