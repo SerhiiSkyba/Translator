@@ -1,3 +1,11 @@
+import sys
+import os
+if sys.argv:
+    filepath = sys.argv[0]
+    folder, filename = os.path.split(filepath)
+    os.chdir(folder.replace("\\Difficulties","")) # now your working dir is the parent folder of the script
+    print(folder.replace("\\Difficulties",""))
+sys.path.append("Database")
 import customtkinter as ctk
 from deep_translator import GoogleTranslator
 import random

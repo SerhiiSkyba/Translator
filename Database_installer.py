@@ -14,17 +14,19 @@ MySQL = mysql.connector.connect(
     database = 'mysql',
 )
 cursor = MySQL.cursor()
-cursor.execute('Create database tlumacz')
-MySQL2 = mysql.connector.connect(
-	host = 'localhost',
-    user = 'root',
-    passwd = '',
-    database = 'tlumacz',
-)
-cursor2 = MySQL2.cursor()
-with open(folder+'\\Database\\pytania.sql', 'r') as f:
-	cursor2.execute(f.read(), multi=True)
-cursor2.execute("CREATE USER 'Admin'@'localhost' IDENTIFIED BY 'admin'")
-cursor2.execute("Grant all privileges on tlumacz to 'Admin'@'localhost'")
-cursor2.execute("Grant all privileges on tlumacz.pytania to 'Admin'@'localhost'")
+try:
+	cursor.execute('Create database tlumacz')
+except:
+	MySQL2 = mysql.connector.connect(
+		host = 'localhost',
+	    user = 'root',
+	    passwd = '',
+	    database = 'tlumacz',
+	)
+	cursor2 = MySQL2.cursor()
+	with open(folder+'\\Database\\pytania.sql', 'r') as f:
+		cursor2.execute(f.read(), multi=True)
+	cursor2.execute("CREATE USER 'Admin'@'localhost' IDENTIFIED BY 'admin'")
+	cursor2.execute("Grant all privileges on tlumacz to 'Admin'@'localhost'")
+	cursor2.execute("Grant all privileges on tlumacz.pytania to 'Admin'@'localhost'")
 		

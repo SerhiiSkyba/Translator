@@ -1,3 +1,12 @@
+import os
+import sys
+if sys.argv:
+    filepath = sys.argv[0]
+    folder, filename = os.path.split(filepath)
+    os.chdir(folder.replace("\\Difficulties",""))
+sys.path.append("Images")
+sys.path.append("Database")
+
 from tkinter import *
 from Baza import listnum  #nr 
 from Baza import listword  #slowo
@@ -6,12 +15,6 @@ import customtkinter as ctk
 from tkinter import messagebox
 from PIL import Image
 import random
-import os
-import sys
-if sys.argv:
-    filepath = sys.argv[0]
-    folder, filename = os.path.split(filepath)
-    os.chdir(folder) # now your working dir is the parent folder of the script
 
 window = ctk.CTk()
 
