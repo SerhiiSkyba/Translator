@@ -115,7 +115,7 @@ pole_wpisu = ctk.CTkEntry(windowgra,
 
 # CZĘŚĆ IMPORTACJI GRAFIKI
 slowo_pl.pack()
-slowo_en.pack()
+#slowo_en.pack()
 questions.pack()
 lives.pack()
 pole_wpisu.pack()

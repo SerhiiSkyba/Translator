@@ -49,7 +49,14 @@ def test(x):
     global wylosowane_slowo
     global wylosowane_slowo_en
     global folder
+    global zycia
     if x == wylosowane_slowo_en.get():
+        btn1.configure(state = E) # E = Enabled
+        btn2.configure(state = E)
+        btn3.configure(state = E)
+        btn4.configure(state = E)
+        btn5.configure(state = E)
+        btn6.configure(state = E)
         wylosowane_slowo = random.choice(pytania)
         pytania.remove(wylosowane_slowo)
         wylosowane_slowo_pl.set(wylosowane_slowo)
@@ -66,9 +73,19 @@ def test(x):
         if zycia == 0 or zycia < 0 :
             messagebox.showinfo(title='Przegrałeś',message='Ty przegrałeś, twój wynnik jest '+str(score))
             window.destroy()
-        #if x == odpA.get() or x == odpB.get() or x == odpC.get() or x == odpD.get() or x == odpE.get() or x == odpF.get():
-            
-        ilosc_zyc.set('Sprób zostało się'+str(zycia))
+        if x == odpA.get():
+            btn1.configure(state = DISABLED)
+        if x == odpB.get():
+            btn2.configure(state = DISABLED)
+        if x == odpC.get():
+            btn3.configure(state = DISABLED)
+        if x == odpD.get():
+            btn4.configure(state = DISABLED)
+        if x == odpE.get():
+            btn5.configure(state = DISABLED)
+        if x == odpF.get():
+            btn6.configure(state = DISABLED)
+        ilosc_zyc.set('Sprób zostało się '+str(zycia))
         windowm = ctk.CTkToplevel()
         my_imagem = ctk.CTkImage(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'),size = (100,100))
         image_labelm = ctk.CTkLabel(windowm, image=my_imagem, text = "")
@@ -97,46 +114,46 @@ def zmien():
     a = random.randint(1,6)
     if a == 1:
         odpA.set(odpP.get())
-        odpB.set(random.choice(listword))
-        odpC.set(random.choice(listword))
-        odpD.set(random.choice(listword))
-        odpE.set(random.choice(listword))
-        odpF.set(random.choice(listword))
+        odpB.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpC.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpD.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpE.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpF.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
     if a == 2:
         odpB.set(odpP.get())
-        odpA.set(random.choice(listword))
-        odpC.set(random.choice(listword))
-        odpD.set(random.choice(listword))
-        odpE.set(random.choice(listword))
-        odpF.set(random.choice(listword))
+        odpA.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpC.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpD.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpE.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpF.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
     if a == 3:
         odpC.set(odpP.get())
-        odpA.set(random.choice(listword))
-        odpB.set(random.choice(listword))
-        odpD.set(random.choice(listword))
-        odpE.set(random.choice(listword))
-        odpF.set(random.choice(listword))
+        odpA.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpB.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpD.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpE.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpF.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
     if a == 4:
         odpD.set(odpP.get())
-        odpA.set(random.choice(listword))
-        odpB.set(random.choice(listword))
-        odpC.set(random.choice(listword))
-        odpE.set(random.choice(listword))
-        odpF.set(random.choice(listword))
+        odpA.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpB.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpC.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpE.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpF.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
     if a == 5:
         odpE.set(odpP.get())
-        odpA.set(random.choice(listword))
-        odpB.set(random.choice(listword))
-        odpD.set(random.choice(listword))
-        odpC.set(random.choice(listword))
-        odpF.set(random.choice(listword))
+        odpA.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpB.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpD.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpC.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpF.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
     if a == 6:
         odpF.set(odpP.get())
-        odpA.set(random.choice(listword))
-        odpB.set(random.choice(listword))
-        odpD.set(random.choice(listword))
-        odpE.set(random.choice(listword))
-        odpC.set(random.choice(listword))
+        odpA.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpB.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpD.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpE.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+        odpC.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
 zmien()
 my_image = ctk.CTkImage(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'),size = (100,100))
 image_label = ctk.CTkLabel(window, image=my_image, text = "")

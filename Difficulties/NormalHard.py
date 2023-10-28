@@ -1,3 +1,11 @@
+import os
+import sys
+if sys.argv:
+    filepath = sys.argv[0]
+    folder, filename = os.path.split(filepath)
+    folder = folder.replace("\\Difficulties","")
+    os.chdir(folder)
+sys.path.append("Database")
 import customtkinter as ctk
 from deep_translator import GoogleTranslator
 import random
@@ -128,7 +136,7 @@ pole_wpisu = ctk.CTkEntry(windowgra,
 
 # CZĘŚĆ IMPORTACJI GRAFIKI
 slowo_pl.pack()
-slowo_en.pack()
+#slowo_en.pack()
 questions.pack()
 lives.pack()
 pole_wpisu.pack()
