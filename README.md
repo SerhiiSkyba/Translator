@@ -1,3 +1,4 @@
+# translator
 1. Program został stworzony, aby uczyć użytkownika języka angielskiego. Zadaniem użytkownika jest wybranie 1 z 4 poziomów, który mu odpowiada.
    Poziom Latwy - użytkownik musi wybrać 1 z 6 odpowiednich odpowiedzi.
    Poziom Średni - użytkownik musi wybrać 1 z 8 odpowiednich odpowiedzi.
@@ -120,7 +121,7 @@ def zmien():
         odpF.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
 
 
-# pracuje tak że jest 5 losowych słów i 1 poprawne słowo.
+#pracuje tak że jest 5 losowych słów i 1 poprawne słowo.
 #tutaj mamy if a == 1, no w programie mamy do 6
 }
 
