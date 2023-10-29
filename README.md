@@ -1,4 +1,4 @@
-# translator
+# Translator
 1. Program został stworzony, aby uczyć użytkownika języka angielskiego. Zadaniem użytkownika jest wybranie 1 z 4 poziomów, który mu odpowiada.
    Poziom Latwy - użytkownik musi wybrać 1 z 6 odpowiednich odpowiedzi.
    Poziom Średni - użytkownik musi wybrać 1 z 8 odpowiednich odpowiedzi.
@@ -14,22 +14,21 @@
    W folderze „Difficulties” znajdują się poziomy trudności.
    W folderze „Images” znajdują się fotografji.
    W folderze „Textures” znajdują się fotografji dla ikony.
-
-5. Opis
+   
+6. Opis
    „Quadrolingers.py”
-{
-   if sys.argv:
-    filepath = sys.argv[0]
-    folder, filename = os.path.split(filepath)
-    os.chdir(folder) # now your working dir is the parent folder of the script
-sys.path.append("Database")
-sys.path.append("Images")
-sys.path.append("Textures")
-sys.path.append("Difficulties")
-
+```
+      if sys.argv:
+       filepath = sys.argv[0]
+       folder, filename = os.path.split(filepath)
+       os.chdir(folder) # now your working dir is the parent folder of the script
+   sys.path.append("Database")
+   sys.path.append("Images")
+   sys.path.append("Textures")
+   sys.path.append("Difficulties")
+```
 #określa lokalizację plików w folderze.
-}
-{
+```
 def start():
     window.destroy()
     from Easy import windowgra
@@ -44,19 +43,19 @@ def start4():
     from Hard import windowgra
 def exit():
     window.destroy()
-
-#Po kliknięciu w wybrany poziom trudności zostanie zaimportowany plik z wybranym poziomem trudności.
-}
-
-#Następnie następuje część graficzna.
+```
+### Po kliknięciu w wybrany poziom trudności zostanie zaimportowany plik z wybranym poziomem trudności.
 
 
+### Następnie następuje część graficzna.
 
-Opis
+
+
+# Opis
 „Poziomów trudności”
 
 
-{
+```
 def test(x):
     global ilosc_pytan_odpowiedzialnych
     global wylosowane_slowo
@@ -103,11 +102,10 @@ def test(x):
         my_imagem = ctk.CTkImage(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'),size = (100,100))
         image_labelm = ctk.CTkLabel(windowm, image=my_imagem, text = "")
         labelm = ctk.CTkLabel(windowm,text = " To jest "+str(wylosowane_slowo_pl.get())+", po angielsku to bedzie "+str(wylosowane_slowo_en.get()))
+```
+### Sprawdza, czy odpowiedź jest prawidłowa, czy nie.
 
-#sprawdza, czy odpowiedź jest prawidłowa, czy nie.
-}
-
-{
+```
 def zmien():
     global odpP, odpA, odpB, odpC, odpD, odpE
     odpP.set(wylosowane_slowo_en.get())
@@ -119,17 +117,15 @@ def zmien():
         odpD.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
         odpE.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
         odpF.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
+```
 
-
-#pracuje tak że jest 5 losowych słów i 1 poprawne słowo.
-#tutaj mamy if a == 1, no w programie mamy do 6
-}
+### pracuje tak że jest 5 losowych słów i 1 poprawne słowo.
 
 To co wyżej napisano to z Opisu Poziomu trudności Latwy. Obydwa poziomy (Latwy i Średni) są do siebie podobne, jedyną różnicą są odpowiedzi. W latwy 6 dpowiedzi, a w średnim 8 dpowiedzi.
 
 
 W Poziom średnio-trudnym
-{
+```
 print(len(wylosowane_slowo))
 alpha = len(tluma)
 for i in range (0,alpha):
@@ -138,9 +134,8 @@ for i in range (0,alpha):
     if a == 'i' or a == 'a' or a == 'e' or a == 'o' or a == 'u':
         tluma2 = tluma2.replace(a,'_')
 prompt.set(tluma2)
-
+```
 #będzie slowo bez samoglosek.
-}
 
 W poziom trudnym 
 Jest tak samo jak w Poziom średnio-trudnym, no poziom trudnym poczebno wpisacz cały wyraz.
