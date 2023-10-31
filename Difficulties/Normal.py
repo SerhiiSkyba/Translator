@@ -31,7 +31,7 @@ ilosc_pytan = ctk.StringVar()
 ilosc_zyc = ctk.StringVar()
 strona = ctk.StringVar()
 
-score = 0
+score = 1
 zycia = 4
 ilosc_pytan_odpowiedzialnych = 1
 ilosc_pytan.set('Pytanie '+str(ilosc_pytan_odpowiedzialnych)+"/20")
@@ -59,6 +59,7 @@ def test(x):
         btn6.configure(state = E)
         btn7.configure(state = E)
         btn8.configure(state = E)
+        score = score+1
         wylosowane_slowo = random.choice(pytania)
         pytania.remove(wylosowane_slowo)
         wylosowane_slowo_pl.set(wylosowane_slowo)
@@ -67,9 +68,9 @@ def test(x):
         my_image.configure(light_image=Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'))
         ilosc_pytan_odpowiedzialnych = ilosc_pytan_odpowiedzialnych + 1
         ilosc_pytan.set('Pytanie '+str(ilosc_pytan_odpowiedzialnych)+"/20")
-        if ilosc_pytan_odpowiedzialnych == 20:
-            messagebox.showinfo(messagebox.showinfo(title='Wygrałeś',message='Ty wygrałeś, twój wynnik jest '+str(score)+'/20'))
+        if ilosc_pytan_odpowiedzialnych == 21:
             window.destroy()
+            messagebox.showinfo(title='Wygrałeś',message='Ty wygrałeś, twój wynik jest '+'20/20')
     else:
         zycia = zycia - 1
         if zycia == 0 or zycia < 0 :
@@ -197,28 +198,37 @@ my_image = ctk.CTkImage(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.ge
 image_label = ctk.CTkLabel(window, image=my_image, text = "")
 zycia_napis = ctk.CTkLabel(window,textvariable = ilosc_zyc)
 pytania_napis = ctk.CTkLabel(window,textvariable = ilosc_pytan)
-btnf = ctk.CTkFrame(window)
+btnf = ctk.CTkFrame(window, bg_color = '#ffffff')
+btnf1 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
+btnf2 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
+btnf3 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
+btnf4 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
 label = ctk.CTkLabel(window, textvariable = wylosowane_slowo_pl)
-btn1 = ctk.CTkButton(btnf,textvariable=odpA,command=lambda:test(odpA.get()))
-btn2 = ctk.CTkButton(btnf,textvariable=odpB,command=lambda:test(odpB.get()))
-btn3 = ctk.CTkButton(btnf,textvariable=odpC,command=lambda:test(odpC.get()))
-btn4 = ctk.CTkButton(btnf,textvariable=odpD,command=lambda:test(odpD.get()))
-btn5 = ctk.CTkButton(btnf,textvariable=odpE,command=lambda:test(odpE.get()))
-btn6 = ctk.CTkButton(btnf,textvariable=odpF,command=lambda:test(odpF.get()))
-btn7 = ctk.CTkButton(btnf,textvariable=odpG,command=lambda:test(odpG.get()))
-btn8 = ctk.CTkButton(btnf,textvariable=odpH,command=lambda:test(odpH.get()))
+btn1 = ctk.CTkButton(btnf1,textvariable=odpA,command=lambda:test(odpA.get()))
+btn2 = ctk.CTkButton(btnf1,textvariable=odpB,command=lambda:test(odpB.get()))
+btn3 = ctk.CTkButton(btnf2,textvariable=odpC,command=lambda:test(odpC.get()))
+btn4 = ctk.CTkButton(btnf2,textvariable=odpD,command=lambda:test(odpD.get()))
+btn5 = ctk.CTkButton(btnf3,textvariable=odpE,command=lambda:test(odpE.get()))
+btn6 = ctk.CTkButton(btnf3,textvariable=odpF,command=lambda:test(odpF.get()))
+btn7 = ctk.CTkButton(btnf4,textvariable=odpG,command=lambda:test(odpG.get()))
+btn8 = ctk.CTkButton(btnf4,textvariable=odpH,command=lambda:test(odpH.get()))
 
 label.pack()
 zycia_napis.pack()
 pytania_napis.pack()
 btnf.pack(side = LEFT)
-btn1.pack()
-btn2.pack()
-btn3.pack()
-btn4.pack()
-btn5.pack()
-btn6.pack()
-btn7.pack()
-btn8.pack()
+btnf.pack()
+btnf1.pack()
+btnf2.pack()
+btnf3.pack()
+btnf4.pack()
+btn1.pack(side = LEFT)
+btn2.pack(side = LEFT)
+btn3.pack(side = LEFT)
+btn4.pack(side = LEFT)
+btn5.pack(side = LEFT)
+btn6.pack(side = LEFT)
+btn7.pack(side = LEFT)
+btn8.pack(side = LEFT)
 
 window.mainloop()

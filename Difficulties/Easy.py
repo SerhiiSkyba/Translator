@@ -18,10 +18,13 @@ from PIL import Image
 import random
 
 window = ctk.CTk()
+window.geometry('300x300')
+
+# STARTOWE ZNACZENIA
 
 pytania = []
-for i in range (1,20):
-    x = random.choice(listword)
+for i in range (1,22):
+    x = random.choice(listword) 
     pytania.append(x)
     listword.remove(x)
 wylosowane_slowo_pl = ctk.StringVar()
@@ -31,11 +34,12 @@ ilosc_pytan = ctk.StringVar()
 ilosc_zyc = ctk.StringVar()
 strona = ctk.StringVar()
 
-score = 0
+
+score = 1
 zycia = 4
 ilosc_pytan_odpowiedzialnych = 1
 ilosc_pytan.set('Pytanie '+str(ilosc_pytan_odpowiedzialnych)+"/20")
-ilosc_zyc.set('Sprób zostało się '+str(zycia))
+ilosc_zyc.set('Prób zostało się '+str(zycia))
 wylosowane_slowo = random.choice(pytania)
 wylosowane_slowo_pl.set(wylosowane_slowo)
 pytania.remove(wylosowane_slowo)
@@ -43,13 +47,14 @@ wylosowane_slowo_en.set(GoogleTranslator(source='pl', target='en').translate(wyl
 
 
 
-
+# FUNKCJA SPRAWDZAJĄCA
 def test(x):
     global ilosc_pytan_odpowiedzialnych
     global wylosowane_slowo
     global wylosowane_slowo_en
     global folder
     global zycia
+    global score
     if x == wylosowane_slowo_en.get():
         btn1.configure(state = E) # E = Enabled
         btn2.configure(state = E)
@@ -59,19 +64,20 @@ def test(x):
         btn6.configure(state = E)
         wylosowane_slowo = random.choice(pytania)
         pytania.remove(wylosowane_slowo)
+        score = score + 1
         wylosowane_slowo_pl.set(wylosowane_slowo)
         wylosowane_slowo_en.set(GoogleTranslator(source='pl', target='en').translate(wylosowane_slowo))
         zmien()
         my_image.configure(light_image=Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'))
         ilosc_pytan_odpowiedzialnych = ilosc_pytan_odpowiedzialnych + 1
         ilosc_pytan.set('Pytanie '+str(ilosc_pytan_odpowiedzialnych)+"/20")
-        if ilosc_pytan_odpowiedzialnych == 20:
-            messagebox.showinfo(messagebox.showinfo(title='Wygrałeś',message='Ty wygrałeś, twój wynnik jest '+str(score)+'/20'))
+        if ilosc_pytan_odpowiedzialnych == 21:
             window.destroy()
+            messagebox.showinfo(title='Wygrałeś',message='Ty wygrałeś, twój wynik jest '+'20/20')
     else:
         zycia = zycia - 1
         if zycia == 0 or zycia < 0 :
-            messagebox.showinfo(title='Przegrałeś',message='Ty przegrałeś, twój wynnik jest '+str(score))
+            messagebox.showinfo(title='Przegrałeś',message='Ty przegrałeś, twój wynik jest '+str(score))
             window.destroy()
         if x == odpA.get():
             btn1.configure(state = DISABLED)
@@ -85,12 +91,11 @@ def test(x):
             btn5.configure(state = DISABLED)
         if x == odpF.get():
             btn6.configure(state = DISABLED)
-        ilosc_zyc.set('Sprób zostało się '+str(zycia))
+        ilosc_zyc.set('Prób zostało się '+str(zycia))
         windowm = ctk.CTkToplevel()
         my_imagem = ctk.CTkImage(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'),size = (100,100))
         image_labelm = ctk.CTkLabel(windowm, image=my_imagem, text = "")
         labelm = ctk.CTkLabel(windowm,text = " To jest "+str(wylosowane_slowo_pl.get())+", po angielsku to bedzie "+str(wylosowane_slowo_en.get()))
-        
         image_labelm.pack()
         labelm.pack()
         windowm.mainloop()
@@ -107,7 +112,7 @@ odpD = ctk.StringVar()
 odpE = ctk.StringVar()
 odpF = ctk.StringVar()
 
-
+# FUNKCJA DO ZMIANY ZNACZEŃ
 def zmien():
     global odpP, odpA, odpB, odpC, odpD, odpE
     odpP.set(wylosowane_slowo_en.get())
@@ -155,27 +160,35 @@ def zmien():
         odpE.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
         odpC.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
 zmien()
+
+#GRAFIKA
 my_image = ctk.CTkImage(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'),size = (100,100))
 image_label = ctk.CTkLabel(window, image=my_image, text = "")
 zycia_napis = ctk.CTkLabel(window,textvariable = ilosc_zyc)
 pytania_napis = ctk.CTkLabel(window,textvariable = ilosc_pytan)
-btnf = ctk.CTkFrame(window)
-btn1 = ctk.CTkButton(btnf,textvariable=odpA,command=lambda:test(odpA.get()))
-btn2 = ctk.CTkButton(btnf,textvariable=odpB,command=lambda:test(odpB.get()))
-btn3 = ctk.CTkButton(btnf,textvariable=odpC,command=lambda:test(odpC.get()))
-btn4 = ctk.CTkButton(btnf,textvariable=odpD,command=lambda:test(odpD.get()))
-btn5 = ctk.CTkButton(btnf,textvariable=odpE,command=lambda:test(odpE.get()))
-btn6 = ctk.CTkButton(btnf,textvariable=odpF,command=lambda:test(odpF.get()))
+btnf = ctk.CTkFrame(window, bg_color = '#ffffff')
+btnf1 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
+btnf2 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
+btnf3 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
+btn1 = ctk.CTkButton(btnf1,textvariable=odpA,command=lambda:test(odpA.get()))
+btn2 = ctk.CTkButton(btnf1,textvariable=odpB,command=lambda:test(odpB.get()))
+btn3 = ctk.CTkButton(btnf2,textvariable=odpC,command=lambda:test(odpC.get()))
+btn4 = ctk.CTkButton(btnf2,textvariable=odpD,command=lambda:test(odpD.get()))
+btn5 = ctk.CTkButton(btnf3,textvariable=odpE,command=lambda:test(odpE.get()))
+btn6 = ctk.CTkButton(btnf3,textvariable=odpF,command=lambda:test(odpF.get()))
 
 image_label.pack()
 zycia_napis.pack()
 pytania_napis.pack()
-btnf.pack(side = LEFT)
-btn1.pack()
-btn2.pack()
-btn3.pack()
-btn4.pack()
-btn5.pack()
-btn6.pack()
+btnf.pack()
+btnf1.pack()
+btnf2.pack()
+btnf3.pack()
+btn1.pack(side = LEFT)
+btn2.pack(side = LEFT)
+btn3.pack(side = LEFT)
+btn4.pack(side = LEFT)
+btn5.pack(side = LEFT)
+btn6.pack(side = LEFT)
 
 window.mainloop()

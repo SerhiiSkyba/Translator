@@ -3,6 +3,7 @@ import sys
 import random
 import customtkinter as ctk
 from tkinter import *
+from tkinter import messagebox
 if sys.argv:
     filepath = sys.argv[0]
     folder, filename = os.path.split(filepath)
@@ -16,8 +17,13 @@ def start():
     window.destroy()
     from Easy import windowgra
 def start2():
-    window.destroy()
-    from Normal import windowgra
+    try:
+        window.destroy()
+        from Normal import windowgra
+    except:
+        messagebox.showerror(title='Error',message='Sprawdż połączenie z internetem')
+        window.destroy()
+
 def start3():
     window.destroy()
     from NormalHard import windowgra

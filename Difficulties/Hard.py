@@ -20,6 +20,7 @@ def funkcja_sprawdzenia():
     # POPRAWNA ODPOWIEDZ
     if prompt.get() == GoogleTranslator(source='pl', target='en').translate(wylosowane_slowo):
         try:
+            
             score = score + 1
 
             wylosowane_slowo = random.choice(pytania)
@@ -32,9 +33,12 @@ def funkcja_sprawdzenia():
 
             ilosc_pytan_odpowiedzialnych = ilosc_pytan_odpowiedzialnych+1
 
-            prompt.get('')
+            prompt.set('')
 
-            ilosc_pytan.set(str(ilosc_pytan_odpowiedzialnych)+"/20")
+            ilosc_pytan.set('Pytanie '+str(ilosc_pytan_odpowiedzialnych)+"/20")
+            if ilosc_pytan_odpowiedzialnych == 21:
+                windowgra.destroy()
+                messagebox.showinfo(title='Wygrałeś',message='Ty wygrałeś, twój wynik jest '+'20/20')
         except:
             messagebox.showerror(title='Error',message='Sprawdż połączenie z internetem')
             windowgra.destroy()
@@ -52,10 +56,10 @@ def funkcja_sprawdzenia():
 
             ilosc_pytan_odpowiedzialnych = ilosc_pytan_odpowiedzialnych+1
 
-            ilosc_pytan.set('Pytanie'+str(ilosc_pytan_odpowiedzialnych)+"/20")
+            ilosc_pytan.set('Pytanie '+str(ilosc_pytan_odpowiedzialnych)+"/20")
 
             zycia = zycia - 1
-            ilosc_zyc.set('Sprób zostało się'+str(zycia))
+            ilosc_zyc.set('Sprób zostało się '+str(zycia))
 
             if zycia == 0 or zycia < 0 :
                 messagebox.showinfo(title='Przegrałeś',message='Ty przegrałeś, twój wynnik jest '+str(score))
@@ -68,7 +72,7 @@ windowgra = ctk.CTk()
 
 # WYLOSOWANIE PYTAŃ
 pytania = []
-for i in range (1,20):
+for i in range (1,23):
     x = random.choice(listword)
     pytania.append(x)
     listword.remove(x)
@@ -83,7 +87,7 @@ ilosc_pytan = ctk.StringVar()
 ilosc_zyc = ctk.StringVar()
 
 # STARTOWE VALUES ZMIENNYCH
-score = 0
+score = 1
 zycia = 4
 ilosc_pytan_odpowiedzialnych = 1
 ilosc_pytan.set('Pytanie '+str(ilosc_pytan_odpowiedzialnych)+"/20")
