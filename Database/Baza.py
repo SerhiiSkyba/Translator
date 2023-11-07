@@ -4,8 +4,8 @@ listnum=[]
 listword=[]
 MySQL = mysql.connector.connect(
             host = 'localhost',
-            user = 'Admin',
-            passwd = 'admin',
+            user = 'root',
+            passwd = '',
             database = 'tlumacz')
 cursor = MySQL.cursor()
 cursor.execute('select * from pytania')

@@ -20,7 +20,11 @@ def funkcja_sprawdzenia():
     # POPRAWNA ODPOWIEDZ
     if prompt.get() == GoogleTranslator(source='pl', target='en').translate(wylosowane_slowo):
         try:
-            
+            if (score%2 == 0):
+                confirm_btn.configure(fg_color="#311f7a")
+            else:
+                confirm_btn.configure(fg_color="#3b278c")
+
             score = score + 1
 
             wylosowane_slowo = random.choice(pytania)
@@ -69,6 +73,9 @@ def funkcja_sprawdzenia():
             windowgra.destroy()
 
 windowgra = ctk.CTk()
+windowgra.geometry('600x600')
+windowgra.resizable("False","False")
+
 
 # WYLOSOWANIE PYTAŃ
 pytania = []
@@ -99,22 +106,31 @@ wylosowane_slowo_en.set(GoogleTranslator(source='pl', target='en').translate(wyl
 
 # CZĘŚĆ GRAFICZNA
 slowo_pl = ctk.CTkLabel(windowgra,
+                        font=("Comic Sans MS",50,'bold','italic','underline'),
                         textvariable = wylosowane_slowo_pl)
 
 slowo_en = ctk.CTkLabel(windowgra,
                         textvariable = wylosowane_slowo_en)
 
 questions = ctk.CTkLabel(windowgra,
+                         font=("Comic Sans MS",20),
                          textvariable = ilosc_pytan)
 
 lives = ctk.CTkLabel(windowgra,
+                     font=("Comic Sans MS",20),
                      textvariable = ilosc_zyc)
 
 confirm_btn = ctk.CTkButton(windowgra,
-                            text = 'Zatwierdz',
+                            width=300,
+                            height=120,
+                            fg_color="#3b278c",
+                            text = 'Zatwierdź',
                             command=lambda:funkcja_sprawdzenia())
 
 pole_wpisu = ctk.CTkEntry(windowgra,
+                          width=300,
+                          height=120,
+                          font=("Comic Sans MS",25),
                           textvariable=prompt)
 
 # CZĘŚĆ IMPORTACJI GRAFIKI

@@ -18,6 +18,10 @@ from PIL import Image
 import random
 
 window = ctk.CTk()
+window.geometry('600x600')
+window.resizable("False","False")
+window.iconbitmap(folder+"\\Textures\\image.ico")
+window.config(background="#ff8f17")
 
 pytania = []
 for i in range (1,20):
@@ -32,7 +36,7 @@ ilosc_zyc = ctk.StringVar()
 strona = ctk.StringVar()
 
 score = 1
-zycia = 4
+zycia = 5
 ilosc_pytan_odpowiedzialnych = 1
 ilosc_pytan.set('Pytanie '+str(ilosc_pytan_odpowiedzialnych)+"/20")
 ilosc_zyc.set('Sprób zostało się '+str(zycia))
@@ -50,6 +54,7 @@ def test(x):
     global wylosowane_slowo_en
     global folder
     global zycia
+    global score
     if x == wylosowane_slowo_en.get():
         btn1.configure(state = E) # E = Enabled
         btn2.configure(state = E)
@@ -60,6 +65,24 @@ def test(x):
         btn7.configure(state = E)
         btn8.configure(state = E)
         score = score+1
+        if (score%2 == 0):
+            btn1.configure(fg_color="#311f7a")
+            btn2.configure(fg_color="#3b278c")
+            btn3.configure(fg_color="#3b278c")
+            btn4.configure(fg_color="#311f7a")
+            btn5.configure(fg_color="#311f7a")
+            btn6.configure(fg_color="#3b278c")
+            btn7.configure(fg_color="#3b278c")
+            btn8.configure(fg_color="#311f7a")
+        else:
+            btn1.configure(fg_color="#3b278c") 
+            btn2.configure(fg_color="#311f7a")
+            btn3.configure(fg_color="#311f7a")
+            btn4.configure(fg_color="#3b278c")
+            btn5.configure(fg_color="#3b278c")
+            btn6.configure(fg_color="#311f7a")
+            btn7.configure(fg_color="#311f7a")
+            btn8.configure(fg_color="#3b278c")
         wylosowane_slowo = random.choice(pytania)
         pytania.remove(wylosowane_slowo)
         wylosowane_slowo_pl.set(wylosowane_slowo)
@@ -94,9 +117,12 @@ def test(x):
             btn8.configure(state = DISABLED)
         ilosc_zyc.set('Sprób zostało się '+str(zycia))
         windowm = ctk.CTkToplevel()
-        my_imagem = ctk.CTkImage(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'),size = (100,100))
+        windowm.geometry('600x600')
+        windowm.resizable("False","False")
+        windowm.config(background="#ff8f17")
+        my_imagem = ctk.CTkImage(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'),size = (500,500))
         image_labelm = ctk.CTkLabel(windowm, image=my_imagem, text = "")
-        labelm = ctk.CTkLabel(windowm,text = " To jest "+str(wylosowane_slowo_pl.get())+", po angielsku to bedzie "+str(wylosowane_slowo_en.get()))
+        labelm = ctk.CTkLabel(windowm,bg_color="#ff8f17",font=("Comic Sans MS",23,'bold','italic'),text = " To jest "+str(wylosowane_slowo_pl.get())+", po angielsku to bedzie "+str(wylosowane_slowo_en.get()))
         
         image_labelm.pack()
         labelm.pack()
@@ -194,24 +220,22 @@ def zmien():
         odpG.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
         odpF.set(GoogleTranslator(source='pl', target='en').translate(random.choice(listword)))
 zmien()
-my_image = ctk.CTkImage(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'),size = (100,100))
-image_label = ctk.CTkLabel(window, image=my_image, text = "")
-zycia_napis = ctk.CTkLabel(window,textvariable = ilosc_zyc)
-pytania_napis = ctk.CTkLabel(window,textvariable = ilosc_pytan)
+zycia_napis = ctk.CTkLabel(window,font=("Comic Sans MS",20),bg_color="#ff8f17",textvariable = ilosc_zyc)
+pytania_napis = ctk.CTkLabel(window,font=("Comic Sans MS",20),bg_color="#ff8f17",textvariable = ilosc_pytan)
 btnf = ctk.CTkFrame(window, bg_color = '#ffffff')
 btnf1 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
 btnf2 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
 btnf3 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
 btnf4 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
-label = ctk.CTkLabel(window, textvariable = wylosowane_slowo_pl)
-btn1 = ctk.CTkButton(btnf1,textvariable=odpA,command=lambda:test(odpA.get()))
-btn2 = ctk.CTkButton(btnf1,textvariable=odpB,command=lambda:test(odpB.get()))
-btn3 = ctk.CTkButton(btnf2,textvariable=odpC,command=lambda:test(odpC.get()))
-btn4 = ctk.CTkButton(btnf2,textvariable=odpD,command=lambda:test(odpD.get()))
-btn5 = ctk.CTkButton(btnf3,textvariable=odpE,command=lambda:test(odpE.get()))
-btn6 = ctk.CTkButton(btnf3,textvariable=odpF,command=lambda:test(odpF.get()))
-btn7 = ctk.CTkButton(btnf4,textvariable=odpG,command=lambda:test(odpG.get()))
-btn8 = ctk.CTkButton(btnf4,textvariable=odpH,command=lambda:test(odpH.get()))
+label = ctk.CTkLabel(window,font=("Comic Sans MS",50,'bold','italic','underline'),bg_color="#ff8f17", textvariable = wylosowane_slowo_pl)
+btn1 = ctk.CTkButton(btnf1,textvariable=odpA,width=300,height=120,fg_color="#3b278c",command=lambda:test(odpA.get()))
+btn2 = ctk.CTkButton(btnf1,textvariable=odpB,width=300,height=120,fg_color="#311f7a",command=lambda:test(odpB.get()))
+btn3 = ctk.CTkButton(btnf2,textvariable=odpC,width=300,height=120,fg_color="#311f7a",command=lambda:test(odpC.get()))
+btn4 = ctk.CTkButton(btnf2,textvariable=odpD,width=300,height=120,fg_color="#3b278c",command=lambda:test(odpD.get()))
+btn5 = ctk.CTkButton(btnf3,textvariable=odpE,width=300,height=120,fg_color="#3b278c",command=lambda:test(odpE.get()))
+btn6 = ctk.CTkButton(btnf3,textvariable=odpF,width=300,height=120,fg_color="#311f7a",command=lambda:test(odpF.get()))
+btn7 = ctk.CTkButton(btnf4,textvariable=odpG,width=300,height=120,fg_color="#311f7a",command=lambda:test(odpG.get()))
+btn8 = ctk.CTkButton(btnf4,textvariable=odpH,width=300,height=120,fg_color="#3b278c",command=lambda:test(odpH.get()))
 
 label.pack()
 zycia_napis.pack()
