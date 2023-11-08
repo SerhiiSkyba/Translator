@@ -18,13 +18,14 @@ from PIL import Image
 import random
 
 window = ctk.CTk()
+window.title("Quadrolingers")
 window.geometry('600x600')
 window.resizable("False","False")
 window.iconbitmap(folder+"\\Textures\\image.ico")
 window.config(background="#ff8f17")
 
 pytania = []
-for i in range (1,20):
+for i in range (1,22):
     x = random.choice(listword)
     pytania.append(x)
     listword.remove(x)
@@ -33,13 +34,15 @@ prompt = ctk.StringVar()
 wylosowane_slowo_en = ctk.StringVar()
 ilosc_pytan = ctk.StringVar()
 ilosc_zyc = ctk.StringVar()
+ilosc_puntkow = ctk.StringVar()
 strona = ctk.StringVar()
 
-score = 1
+score = 0
 zycia = 5
 ilosc_pytan_odpowiedzialnych = 1
 ilosc_pytan.set('Pytanie '+str(ilosc_pytan_odpowiedzialnych)+"/20")
-ilosc_zyc.set('Sprób zostało się '+str(zycia))
+ilosc_zyc.set('Żyć zostało: '+str(zycia))
+ilosc_puntkow.set('Ilość zdobytych punktów: '+str(score))
 wylosowane_slowo = random.choice(pytania)
 wylosowane_slowo_pl.set(wylosowane_slowo)
 pytania.remove(wylosowane_slowo)
@@ -88,16 +91,16 @@ def test(x):
         wylosowane_slowo_pl.set(wylosowane_slowo)
         wylosowane_slowo_en.set(GoogleTranslator(source='pl', target='en').translate(wylosowane_slowo))
         zmien()
-        my_image.configure(light_image=Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'))
         ilosc_pytan_odpowiedzialnych = ilosc_pytan_odpowiedzialnych + 1
+        ilosc_puntkow.set('Ilość zdobytych punktów: '+str(score))
         ilosc_pytan.set('Pytanie '+str(ilosc_pytan_odpowiedzialnych)+"/20")
         if ilosc_pytan_odpowiedzialnych == 21:
             window.destroy()
-            messagebox.showinfo(title='Wygrałeś',message='Ty wygrałeś, twój wynik jest '+'20/20')
+            messagebox.showinfo(title='Wygrałeś',message='Wygrałeś, Twój wynik to: '+str(score))
     else:
         zycia = zycia - 1
         if zycia == 0 or zycia < 0 :
-            messagebox.showinfo(title='Przegrałeś',message='Ty przegrałeś, twój wynnik jest '+str(score))
+            messagebox.showinfo(title='Przegrałeś',message='Przegrałeś, twój wynik to '+str(score))
             window.destroy()
         if x == odpA.get():
             btn1.configure(state = DISABLED)
@@ -115,14 +118,14 @@ def test(x):
             btn7.configure(state = DISABLED)
         if x == odpH.get():
             btn8.configure(state = DISABLED)
-        ilosc_zyc.set('Sprób zostało się '+str(zycia))
+        ilosc_zyc.set('Żyć zostało: '+str(zycia))
         windowm = ctk.CTkToplevel()
         windowm.geometry('600x600')
         windowm.resizable("False","False")
         windowm.config(background="#ff8f17")
-        my_imagem = ctk.CTkImage(Image.open(folder+"\Images\\"+str(wylosowane_slowo_en.get())+'.jpg'),size = (500,500))
+        my_imagem = ctk.CTkImage(Image.open(folder+"\Images\\"+str(x)+'.jpg'),size = (500,500))
         image_labelm = ctk.CTkLabel(windowm, image=my_imagem, text = "")
-        labelm = ctk.CTkLabel(windowm,bg_color="#ff8f17",font=("Comic Sans MS",23,'bold','italic'),text = " To jest "+str(wylosowane_slowo_pl.get())+", po angielsku to bedzie "+str(wylosowane_slowo_en.get()))
+        labelm = ctk.CTkLabel(windowm,bg_color="#ff8f17",font=("Comic Sans MS",18,'bold','italic'),text = " Kliknąłeś błędnie "+str((GoogleTranslator(source='en', target='pl').translate(x)))+", a po angielsku to: "+str(x))
         
         image_labelm.pack()
         labelm.pack()
@@ -222,12 +225,14 @@ def zmien():
 zmien()
 zycia_napis = ctk.CTkLabel(window,font=("Comic Sans MS",20),bg_color="#ff8f17",textvariable = ilosc_zyc)
 pytania_napis = ctk.CTkLabel(window,font=("Comic Sans MS",20),bg_color="#ff8f17",textvariable = ilosc_pytan)
+punkty_napis = ctk.CTkLabel(window,font=("Comic Sans MS",20),bg_color="#ff8f17", textvariable = ilosc_puntkow)
 btnf = ctk.CTkFrame(window, bg_color = '#ffffff')
 btnf1 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
 btnf2 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
 btnf3 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
 btnf4 = ctk.CTkFrame(btnf, bg_color = '#ffffff')
 label = ctk.CTkLabel(window,font=("Comic Sans MS",50,'bold','italic','underline'),bg_color="#ff8f17", textvariable = wylosowane_slowo_pl)
+
 btn1 = ctk.CTkButton(btnf1,textvariable=odpA,width=300,height=120,fg_color="#3b278c",command=lambda:test(odpA.get()))
 btn2 = ctk.CTkButton(btnf1,textvariable=odpB,width=300,height=120,fg_color="#311f7a",command=lambda:test(odpB.get()))
 btn3 = ctk.CTkButton(btnf2,textvariable=odpC,width=300,height=120,fg_color="#311f7a",command=lambda:test(odpC.get()))
@@ -238,6 +243,7 @@ btn7 = ctk.CTkButton(btnf4,textvariable=odpG,width=300,height=120,fg_color="#311
 btn8 = ctk.CTkButton(btnf4,textvariable=odpH,width=300,height=120,fg_color="#3b278c",command=lambda:test(odpH.get()))
 
 label.pack()
+punkty_napis.pack()
 zycia_napis.pack()
 pytania_napis.pack()
 btnf.pack(side = LEFT)

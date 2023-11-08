@@ -73,6 +73,7 @@ def funkcja_sprawdzenia():
             windowgra.destroy()
 
 windowgra = ctk.CTk()
+windowgra.title("Quadrolingers")
 windowgra.geometry('600x600')
 windowgra.resizable("False","False")
 

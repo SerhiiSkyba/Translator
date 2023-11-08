@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 24 Paź 2023, 07:25
+-- Czas generowania: 08 Lis 2023, 12:11
 -- Wersja serwera: 10.4.25-MariaDB
 -- Wersja PHP: 7.4.30
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Baza danych: `poziom_latwy`
+-- Baza danych: `tlumacz`
 --
 
 -- --------------------------------------------------------
@@ -76,7 +76,12 @@ INSERT INTO `pytania` (`Nr`, `slowo`) VALUES
 (37, 'plecak'),
 (38, 'bluza'),
 (39, 'kurtka'),
-(40, 'papier ');
+(40, 'papier '),
+(41, 'duch'),
+(42, 'żaba'),
+(43, 'koza'),
+(44, 'wybuch'),
+(45, 'warzywa');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -96,7 +101,7 @@ ALTER TABLE `pytania`
 -- AUTO_INCREMENT dla tabeli `pytania`
 --
 ALTER TABLE `pytania`
-  MODIFY `Nr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `Nr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
