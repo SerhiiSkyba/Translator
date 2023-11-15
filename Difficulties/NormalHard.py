@@ -61,7 +61,6 @@ def funkcja_sprawdzenia():
     wylo=wylo+'|'+wylosowane_slowo+'|                    |'+prompt.get()+'|\n'
     # POPRAWNA ODPOWIEDZ
     if prompt.get() == GoogleTranslator(source='pl', target='en').translate(wylosowane_slowo):
-        try:
             score = score + 1
 
             wylosowane_slowo = random.choice(pytania)
@@ -81,24 +80,21 @@ def funkcja_sprawdzenia():
                 if a == 'i' or a == 'a' or a == 'e' or a == 'o' or a == 'u':
                     tluma2 = tluma2.replace(a,'_')
             prompt.set(tluma2)
-
-            for i in range (0, len(wylosowane_slowo_en)):
-                if prompt[i] == wylosowane_slowo_en[i]:
+            for i in range (0, len(wylosowane_slowo_en.get())):
+                if prompt[i] == m[i]:
                     prompt.get(prompt[i])
             ilosc_pytan_odpowiedzialnych = ilosc_pytan_odpowiedzialnych+1
             ilosc_pytan.set(str(ilosc_pytan_odpowiedzialnych)+"/20")
             if ilosc_pytan_odpowiedzialnych == 21:
                 messagebox.showinfo(title='Wygrałeś',message='Ty wygrałeś, twój wynnik jest '+str(score)+'/20\n'+'Tabela z odpowiedziami:\n'+wylo)
                 windowgra.destroy()
-        except:
-            messagebox.showerror(title='Error',message='Sprawdż połączenie z internetem')
-            windowgra.destroy()
+        
 
         
     
     # ŻLA ODPOWIEDZ
     else:
-        try:
+        
             soundthread = threading.Thread(playsound(folder+'\\Sound\\Bad.mp3'))
             soundthread.start()
 
@@ -127,9 +123,7 @@ def funkcja_sprawdzenia():
             if zycia == 0 or zycia < 0 :
                 messagebox.showinfo(title='Przegrałeś',message='Ty przegrałeś, twój wynnik jest '+str(score)+'/20\n'+'Tabela z odpowiedziami:\n'+wylo)
                 windowgra.destroy()
-        except:
-            messagebox.showerror(title='Error',message='Sprawdż połączenie z internetem')
-            windowgra.destroy()
+    
 
 # CZĘŚĆ GRAFICZNA
 
